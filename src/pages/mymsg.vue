@@ -1,6 +1,5 @@
 <template>
   <div class='container'>
-    <vheader></vheader>
     <van-cell-group>
         <van-field
           v-model="message"
@@ -42,7 +41,6 @@
           <div class='msgFoot'>{{converTime(item.time)}}</div>
         </div>
     </div>
-    <tab></tab>
   </div>
 </template>
 

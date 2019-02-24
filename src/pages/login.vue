@@ -38,7 +38,7 @@
               </router-link>
           </div>
     </div>
-    <foot></foot>
+    <foot v-show="hidshow"></foot>
   </div>
 </template>
 <script>
@@ -51,14 +51,43 @@ export default {
   name: 'login',
   data () {
     return {
-      headSrc:require('@/assets/h6.jpg'),
+      headSrc:require('@/assets/h1.jpg'),
       msg: '用户登录',
       username:'',
-      password:''
+      password:'',
+      hidshow:true,
+      docmHeight: document.documentElement.clientHeight,  //默认屏幕高度
+      showHeight:  document.documentElement.clientHeight,  //实时屏幕高度
+      isResize:false //默认屏幕高度是否已获取
     }
+  },
+  mounted() {
+    window.onresize = () =>{
+      return(
+        ()=>{
+          if(!this.isResize){
+            //默认屏幕高度                               
+            this.docmHeight=document.documentElement.clientHeight                                
+            this.isResize = true
+          }
+           this.showHeight = document.body.clientHeight 
+        }
+      )()
+    }
+  },
+  watch:{
+    showHeight:'changeHeight'
   },
   methods: {
     // ...mapMutations(['LOGIN']),
+    changeHeight() {        
+        if(this.docmHeight > this.showHeight){         
+             this.hidshow=false       
+        }else{            
+          this.hidshow=true       
+         }    
+    },
+
     loginUser(){
       let params = {'user_name':this.username,'password':this.password}
       if(params.user_name && params.password){

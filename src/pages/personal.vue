@@ -1,6 +1,5 @@
 <template>
   <div class='container'>
-    <vheader></vheader>
     <div class='form'>
           <div>
               <img :src="headSrc" class='hdsrc'>
@@ -15,7 +14,6 @@
           </div>
          
     </div>
-    <tab></tab>
   </div>
 </template>
 

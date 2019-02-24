@@ -1,6 +1,5 @@
 <template>
   <div class='container'>
-    <vheader></vheader>
     <div class='mainContent'>
         <van-search
         v-model="songName"
@@ -23,12 +22,11 @@
                     <span class='songT'>
                         {{item.name}}--{{item.artists[0].name}}
                     </span>
-                    <span class='songLogo'><van-icon name="play" size='80px'/></span>
+                    <span class='songLogo'><van-icon name="play" size='.8rem'/></span>
                 </li>
             </ul>
         </div>
     </div>
-    <tab></tab>
   </div>
 </template>
 

@@ -1,12 +1,20 @@
 <template>
   <div id="app">
-    <router-view/>
+      <vheader></vheader>
+      <router-view></router-view>
+      <tab></tab>
   </div>
 </template>
 
 <script>
+import vheader from '@/components/vheader';
+import tab from '@/components/tab';
 export default {
-  name: 'App'
+  name: 'App',
+  components:{
+    vheader,
+    tab
+  },
 }
 </script>
 

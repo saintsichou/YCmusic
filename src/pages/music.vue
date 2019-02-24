@@ -1,15 +1,13 @@
 <template>
   <div class='container'>
-    <vheader></vheader>
     <h2 class='songTitle'>歌名:{{decodeURIComponent(this.$route.query.songName)}}</h2>
     <h3 class='songArt'>演奏:{{decodeURIComponent(this.$route.query.artists)}}</h3>
     <div class='center2'  @click='toggle'>
         <img :src = 'imgUrl'  :class='[flage?active:noactive]'/>
-        <van-icon name="play" size='190px' class='plogo' color='#fff' @click.stop='toggle' v-if='!flage'/>
+        <van-icon name="play" size='1.8rem' class='plogo' color='#fff' @click.stop='toggle' v-show='!flage'/>
 
     </div>
     <audio :src='url' ref='player' preload="auto" controls autoplay id='musicApp' @click='toggle' @ended='end'></audio>
-
   </div>
 </template>
 
@@ -86,17 +84,17 @@ export default {
     width:100%;
     height:100%;
     position:absolute;
-    // background:#fff2d7
-    background: url('../../static/imgs/bg5.jpg') center center no-repeat;
+    background:#fff2d7;
+    // background: url('../../static/imgs/bg5.jpg') center center no-repeat;
     background-size:cover;
   }
   .songTitle{
-    color:#fff;
+    color:#473c5d;
     font-size:22px;
     margin:20px 0;
   }
   .songArt{
-    color:#fff;
+    color:#473c5d;
     font-size:20px;
 
   }

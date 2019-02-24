@@ -1,6 +1,5 @@
 <template>
   <div class='container'>
-    <vheader></vheader>
     <div class='musicBox'>
        <div class= 'boxHeader'>
             <div class='innerbox'>
@@ -38,7 +37,7 @@
                        {{item.name}}--
                        {{item.ar[0].name}}
                     </span>
-                    <span class='songLogo'><van-icon name="play" size='80px'/></span>
+                    <span class='songLogo'><van-icon name="play" size='.6rem'/></span>
                 </li>
             </ul>
         </div>
@@ -173,7 +172,7 @@ export default {
                 li{  
                     background:#473c5d;
                     // opacity:0.5;
-                    line-height:50px;
+                    line-height:46px;
                     color:#fff;
                     font-size:12px;
                     text-align:left;

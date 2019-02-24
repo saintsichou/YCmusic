@@ -1,9 +1,8 @@
 <template>
   <div>
-    <vheader></vheader>
     <van-swipe :autoplay="3000" indicator-color="white">
       <van-swipe-item v-for='(item,index) in items' :key='item.id' >
-         <img :src="item.imageUrl" class='banner' @click='jumpBanner(item.encodeId)'/>
+         <img :src="item.imageUrl " class='banner' @click='jumpBanner(item.encodeId)'/>
       </van-swipe-item>
     </van-swipe>
     <h2 class='van-nav-bar__title'>推荐歌单</h2>
@@ -17,7 +16,7 @@
           <van-card
             :desc="list.description"  
             :title="list.name"
-            :thumb="list.coverImgUrl"
+            :thumb="list.coverImgUrl "
             :tag="list.tags[0]"
           >
             <div slot="tags">
@@ -29,13 +28,11 @@
         </div>
     </div>
     </van-pull-refresh>
-    <tab></tab>
   </div>
 </template>
 
 <script>
-import vheader from '@/components/vheader';
-import tab from '@/components/tab';
+
 import api from '../api/api.js';
 import {mapGetters,mapMutations,mapState} from 'vuex';
 import { Lazyload } from 'vant';
@@ -95,10 +92,6 @@ export default {
         })
       }, 500);
     }
-  },
-  components:{
-    vheader,
-    tab
   },
   ...mapMutations({
     count:'ADD_COUNT'
