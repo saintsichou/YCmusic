@@ -1,5 +1,5 @@
 <template>
-  <div class='container'>
+  <div class='container'> 
     <div class='musicBox'>
        <div class= 'boxHeader'>
             <div class='innerbox'>
@@ -50,7 +50,7 @@
 import vheader from '@/components/vheader';
 import tab from '@/components/tab';
 import api from '../api/api.js';
-import {mapGetters,mapMutations,mapState} from 'vuex';
+import {mapGetters,mapMutations,mapState,mapActions} from 'vuex';
 import { Lazyload } from 'vant';
 import { PullRefresh } from 'vant';
 import { Toast } from 'vant';
@@ -88,9 +88,15 @@ export default {
   methods: {
      jumpSong(id,name,art){
         //   this.$router.push({ path: '/music', query: { songID: id,songName: name,artists:art}});
-          this.$router.push({ path: '/music', query: { songID: id,songName: encodeURIComponent(name),artists:encodeURIComponent(art)}});
+        //   this.$router.push({ path: '/music', query: { songID: id,songName: encodeURIComponent(name),artists:encodeURIComponent(art)}});
+          this.$store.dispatch('songurl',{
+              'id':id,
+              'title':name,
+              'singer':art
+          })
         //  console.log(id)songPlay
-     }
+     },
+     ...mapActions(['songurl'])
   },
   components:{
     vheader,

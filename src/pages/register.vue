@@ -1,11 +1,5 @@
 <template>
   <div class='bg'>
-    <van-notice-bar
-      text="热烈庆祝李乾睿同志的作业完成一半，请再接再厉！！！"
-      left-icon="volume-o"
-      background='#276dfd'
-      color='#fff'
-    />
     <div class='form'>
           <div>
               <img :src="headSrc" class='hdsrc'>
@@ -38,7 +32,6 @@
               </router-link>
           </div>
     </div>
-    <foot></foot>
   </div>
 </template>
 
@@ -54,7 +47,7 @@ export default {
   data () {
     return {
         msg: '用户注册',
-        headSrc:require('@/assets/h6.jpg'),
+        headSrc:require('@/assets/h1.jpg'),
         username:'',
         password:''
         }
@@ -95,7 +88,9 @@ $background:#fff;
   position:relative;
   width:100%;
   height:100%;
-  background:$background
+  background:$background;
+  text-align:center;
+
 }
 .form{
   width:100%;

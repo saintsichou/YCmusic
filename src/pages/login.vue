@@ -1,7 +1,7 @@
 <template>
   <div class='bg'>
     <van-notice-bar
-      text="热烈庆祝李乾睿同志的作业完成一半，请再接再厉！！！"
+      text="热烈庆祝中华人民共和国70华诞！！！！"
       left-icon="volume-o"
       background='#276dfd'
       color='#fff'
@@ -105,7 +105,7 @@ export default {
                 Toast.success('登录成功');
                 this.username='';
                 this.password='';
-                this.$router.push('/home')
+                this.$router.push('/mainmodel')
                 
             }else{
                 Toast('账号或密码错误');
@@ -129,7 +129,8 @@ $background:#fff;
   position:relative;
   width:100%;
   height:100%;
-  background:$background
+  background:$background;
+  text-align:center;
 }
 .form{
   width:100%;

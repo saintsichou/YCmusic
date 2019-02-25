@@ -50,6 +50,9 @@ const mutations = {
       },
       [types.MY_MSG] (state,msg) {
          state.msgs = msg
+      },
+      [types.SONG_URL] (state,songurl){
+        state.songUrl = songurl
       }
 }
 export default mutations;

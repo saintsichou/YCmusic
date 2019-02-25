@@ -29,3 +29,5 @@ export const SET_FAVORITE_LIST = 'SET_FAVORITE_LIST'
 export const ADD_COUNT = 'ADD_COUNT'
 
 export const MY_MSG = 'MY_MSG'
+
+export const SONG_URL = "SONG_URL"

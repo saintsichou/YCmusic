@@ -1,14 +1,14 @@
 <template>
 
     <van-tabbar v-model="active"  v-show="hidshow" >
-        <van-tabbar-item icon="home-o" to="/home" :active='0'>
+        <van-tabbar-item icon="home-o" to="home" :active='0'>
                 首页              
         </van-tabbar-item>
-        <van-tabbar-item icon="search" dot to="/search" :active='1'>搜索</van-tabbar-item>
-        <van-tabbar-item icon="friends-o" info="5" to="/mymsg" :active='2'>
+        <van-tabbar-item icon="search" dot to="search" :active='1'>搜索</van-tabbar-item>
+        <van-tabbar-item icon="friends-o" info="5" to="mymsg" :active='2'>
                   留言板
         </van-tabbar-item>
-        <van-tabbar-item icon="setting-o" to="/personal" :active='3'>我的主页</van-tabbar-item>
+        <van-tabbar-item icon="setting-o" to="personal" :active='3'>我的主页</van-tabbar-item>
     </van-tabbar>
 </template>
 

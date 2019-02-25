@@ -1,10 +1,12 @@
 import * as types from './var';
 
-const getters = {
-    [types.LOGIN](state){
-        return state.userInfo
-    }
-}
+// const getters = {
+//     [types.LOGIN](state){
+//         return state.userInfo
+//     }
+// }
+export const loginInfo = state  => state.userInfo
+
 export const musicList = state => state.musicList
 
 export const singer = state => state.singer
@@ -35,4 +37,4 @@ export const favoriteList = state => state.favoriteList
 
 export const myMsg = state => state.msgs
 
-export default getters;
+export const songUrl = state => state.songUrl

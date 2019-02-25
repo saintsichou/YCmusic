@@ -1,13 +1,15 @@
 <template>
-  <div class='container'>
+  <div class='container' id='player'>
+    <vheader></vheader>
     <h2 class='songTitle'>歌名:{{decodeURIComponent(this.$route.query.songName)}}</h2>
     <h3 class='songArt'>演奏:{{decodeURIComponent(this.$route.query.artists)}}</h3>
-    <div class='center2'  @click='toggle'>
-        <img :src = 'imgUrl'  :class='[flage?active:noactive]'/>
-        <van-icon name="play" size='1.8rem' class='plogo' color='#fff' @click.stop='toggle' v-show='!flage'/>
-
+    <div class='broast'>
+          <div class='cd'  @click='toggle'>
+              <img :src = 'imgUrl'  :class='cdCls'/>
+              <van-icon name="play" size='1.8rem' class='plogo' color='#fff' @click.stop='toggle' v-show='!flage'/>
+          </div>
     </div>
-    <audio :src='url' ref='player' preload="auto" controls autoplay id='musicApp' @click='toggle' @ended='end'></audio>
+    <audio :src='url' ref='player' preload="auto" controls autoplay loop id='musicApp' @click='toggle' @ended='end'></audio>
   </div>
 </template>
 
@@ -26,9 +28,6 @@ export default {
     return {
        url:'',
        imgUrl:require("../assets/h1.jpg"),
-       flage:'',
-       active:'active',
-       noactive:'center',
        playing:true
     }
   },
@@ -36,6 +35,10 @@ export default {
 
   },
   mounted() {
+     let m = document.querySelector('#player')
+      m.addEventListener('touchstart',function(){
+         this.startMusic()
+    })
     this.flage =true;
     api.songPlay(this.$route.query.songID).then(res =>{
       console.log(res.data.data[0].url)
@@ -47,6 +50,11 @@ export default {
       }
 
     })
+  },
+  computed: {
+    cdCls () {
+      return this.playing ? 'play' : 'play pause'
+    },
   },
   methods: {
     startMusic(){
@@ -84,19 +92,25 @@ export default {
     width:100%;
     height:100%;
     position:absolute;
-    background:#fff2d7;
+    background:rgba(0,0,0,.6);
     // background: url('../../static/imgs/bg5.jpg') center center no-repeat;
     background-size:cover;
+    overflow:hidden;
   }
   .songTitle{
-    color:#473c5d;
-    font-size:22px;
+    color:#fff;
+    font-size:16px;
     margin:20px 0;
   }
   .songArt{
-    color:#473c5d;
-    font-size:20px;
+    color:#fff;
+    font-size:14px;
 
+  }
+  .broast{
+    width:100%;
+    height:300px;
+    position:relative;
   }
   .center2{
     width:100%;
@@ -115,7 +129,7 @@ export default {
     bottom:0;
     margin:auto;
     z-index:2;
-
+    animation-play-state: paused;
     img{
       width:100%;
       border-radius:50%;
@@ -144,20 +158,48 @@ export default {
     bottom:0;
     margin:auto;
   }
-  .active{
-    width:150px;
-    height:150px;
-    position:absolute;
-    border:20px solid #000;
-    border-radius:50%;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    margin:auto;
-    z-index:2;
-    animation: mymove 7s linear infinite ;
-  }
+  // .active{
+  //   width:150px;
+  //   height:150px;
+  //   position:absolute;
+  //   border:20px solid #000;
+  //   border-radius:50%;
+  //   top:0;
+  //   left:0;
+  //   right:0;
+  //   bottom:0;
+  //   margin:auto;
+  //   z-index:2;
+  //   animation: mymove 7s linear infinite ;
+  // }
+  .cd{
+      width:150px;
+      height:150px;
+      position:absolute;
+      border:20px solid #000;
+      border-radius:50%;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      margin:auto;
+      z-index:2;
+      // animation: mymove 7s linear infinite;
+        .play {
+          animation: mymove 7s linear infinite;
+        }
+        .pause {
+          animation-play-state: paused;
+        }
+            img {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+            }
+    }
    @keyframes mymove
   {
   from{transform:rotate(0deg)}

@@ -34,6 +34,10 @@ export default {
  searchhot: () => {
   return http.fetchGet(`/search/hot`)
 },
+//搜索建议
+searchSuggest: (keywords) => {
+  return http.fetchGet(`/search/suggest?keywords=${keywords}`)
+},
  //跳转歌单详情
  songDetail: (id) => {
    return http.fetchGet(`/playlist/detail?id=${id}`)

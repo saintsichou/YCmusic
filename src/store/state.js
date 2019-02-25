@@ -11,7 +11,7 @@ const state = {
     musicList: {},
     singer: {},
     // 播放
-    playing: false,
+    playing: true,
     // 全屏
     fullScreen: false,
     //歌单
@@ -27,6 +27,7 @@ const state = {
     topList: {},
     //留言板
     msgs:[],
+    songUrl:{}
     // searchHistory: loadSearch(),
     // playHistory: loadPlay(),
     // favoriteList: loadFavorite()
