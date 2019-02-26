@@ -16,7 +16,7 @@
             v-model="value"
             icon="like"
             void-icon="like-o"
-            color="#1989fa"
+            color="#f44"
           />
           <span class='fontValue'>{{this.value}}分</span>
           <van-button  type="primary" size="mini" @click='send'>发送留言</van-button>
@@ -26,7 +26,7 @@
     <div class='box'>
         <div class='msgBox' v-for='(item,index) in list' :key='item.id'>
           <div class='msgheader'>
-              <span :class='[item.vip===1 ?vip1:vip0]'>{{item.user_name}}<span v-if='item.vip===1'><超级VIP></span></span>
+              <span :class='vip0'>{{item.user_name}}</span>
               <van-rate
                 v-model="item.star"
                 icon="like"
@@ -76,8 +76,10 @@ export default {
         if(res.data.code ===1){
           api.pullMsg().then((res)=>{
               // console.log(res.data.data)
+              let data = res.data.data;
+              console.log(data.sort(function(a,b){return b.id - a.id}))
               this.list = res.data.data;
-             this.$store.dispatch('addmsgs',res.data.data)
+            //  this.$store.dispatch('addmsgs',res.data.data)
           })
         }else{
           this.$router.push('/')
@@ -87,6 +89,9 @@ export default {
       })
   },
   methods: {
+    sortN(a,b){
+      return b.id - a.id
+    },
     send(){
       // console.log(time())
       if(this.message == ''){
@@ -104,7 +109,7 @@ export default {
             console.log(res)
               console.log(time())
             if(res.data.status === 200){
-              this.list.push({
+              this.list.unshift({
                 user_id:1,
                 user_name:sessionStorage.getItem('user'),
                 message:this.message,

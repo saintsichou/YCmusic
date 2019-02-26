@@ -8,24 +8,32 @@
     <h2 class='van-nav-bar__title'>推荐歌单</h2>
     <van-pull-refresh 
     v-model="isLoading" 
-    loading-text='擦屁股中...'
-    loosing-text='李乾睿正在拉屎中...' 
+    loading-text='马上好...'
+    loosing-text='猿正在拉取中...' 
     @refresh="onRefresh">
     <div class='vcard'>
-      <div class='vscard' v-for='(list,index) in playlist' :key='list.id' @click='jumpPlaylist(list.id)'>
-          <van-card
-            :desc="list.description"  
-            :title="list.name"
-            :thumb="list.coverImgUrl "
-            :tag="list.tags[0]"
-          >
-            <div slot="tags">
-              <van-tag style='background:#fff' class='van-tag van-tag--plain van-hairline--surround' v-for='(tag,index) in list.tags' :key='index'>{{tag}}</van-tag>
-            </div>
-            <div slot="footer">
-            </div>
-          </van-card>
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        finished-text="没有更多了"
+        @load="onLoad"
+      >
+        <div class='vscard' v-for='(list,index) in playlist' :key='index' @click='jumpPlaylist(list.id)'>
+            <van-card
+              :desc="list.description"  
+              :title="list.name"
+              :thumb="list.coverImgUrl  || imgs "
+              :tag="list.tags[0]"
+            >
+                <div slot="tags">
+                  <van-tag style='background:#fff' class='van-tag van-tag--plain van-hairline--surround' v-for='(tag,index) in list.tags' :key='index'>{{tag}}</van-tag>
+                </div>
+                <div slot="footer">
+                </div>
+            </van-card>
         </div>
+      </van-list>
+      
     </div>
     </van-pull-refresh>
   </div>
@@ -42,11 +50,15 @@ export default {
   data () {
     return {
       msg: 'home',
+      imgs: require('@/assets/h1.jpg'),
       user:'',
       items:[],
       playlist:[],
       isLoading: false,
-      count:5
+      count:5,
+      loading: false,
+      finished: false,
+      list:[]
     }
   },
   computed: {
@@ -70,11 +82,26 @@ export default {
     }).catch(err => {
       console.log(`错误 - ${err}`)
     })
-    api.playList(this.count).then(res => {
-      this.playlist = res.data.playlists
-    })
+    // api.playList(5).then(res => {
+    //   this.playlist = res.data.playlists
+    // })
   },
   methods: {
+     onLoad() {
+      // 异步更新数据
+
+      setTimeout(() => {
+        api.playList(this.count++).then(res => {
+          // this.playlist = res.data.playlists
+          this.playlist = this.playlist.slice(this.count).concat(res.data.playlists)
+        })
+        this.loading = false;
+
+        if (this.playlist.length >= res.data.total) {
+          this.finished = true;
+        }
+      }, 500);
+    },
     jumpBanner(id){
       // this.$router.push({ path: '/musiclist', query: { songID: id }});
     },
@@ -86,7 +113,7 @@ export default {
       setTimeout(() => {
         this.$toast('刷新成功');
         this.isLoading = false;
-        this.count = this.count+5;
+        this.count = this.count;
         api.playList(this.count).then(res => {
           this.playlist = res.data.playlists
         })
