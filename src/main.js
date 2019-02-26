@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import fastclick from 'fastclick'
 import store from './store/store';
+//高德地图
 
 // main.js
 import 'lib-flexible'

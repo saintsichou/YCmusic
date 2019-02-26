@@ -7,14 +7,15 @@
           <div class='title'>昵称:{{msg}}</div>
           <div class='list'>
              <van-cell-group>
-              <van-cell icon="fire" title="天气" is-link />
+              <van-cell icon="fire" title="天气"  is-link  to='/gmap' />
               <van-cell icon="like" title="我的信息" is-link />
               <van-cell icon="setting" title="修改密码" is-link />
             </van-cell-group>
           </div>
-         
     </div>
+    
   </div>
+  
 </template>
 
 <script>
@@ -32,6 +33,7 @@ export default {
     return {
       headSrc:require('@/assets/h6.jpg'),
       msg: sessionStorage.getItem('user'),
+      show: false
     }
   },
   computed: {
@@ -41,7 +43,9 @@ export default {
     
   },
   methods: {
-    
+    opens(){
+      this.show = true
+    }
   },
   components:{
     vheader,
