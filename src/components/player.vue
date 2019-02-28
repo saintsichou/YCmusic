@@ -16,7 +16,7 @@
       <transition name='mini' >
           <div class="mini-player"  v-show='this.$store.state.songUrl.title'>
             <div class="icon" @click='toggle'>
-              <img :class="cdCls"  :src="imgUrl" width="40" height="40">
+              <img :class="cdCls"  :src="imgUrl">
               <van-icon name="play" size='.8rem' class='plogo2' color='#fff' @click.stop='toggle' v-show='playIcon'/>
             </div>
             <div class="text">
@@ -120,53 +120,53 @@ export default {
         this.$store.dispatch('songurl',{id:'',title:''})
     },
     //拖拽小图标
-    down(){
-        this.flags = true;
-        var touch;
-        if(event.touches){
-            touch = event.touches[0];
-        }else {
-            touch = event;
-        }
-        this.position.x = touch.clientX;
-        this.position.y = touch.clientY;
-        this.dx = player.offsetLeft;
-        this.dy = player.offsetTop;
-      },
-      move(){
-        if(this.flags){
-          var touch ;
-          if(event.touches){
-              touch = event.touches[0];
-          }else {
-              touch = event;
-          }
-          this.nx = touch.clientX - this.position.x;
-          console.log(this.nx)
-          // if(this.nx<0){
-          //   this.nx=0
-          // }
-          // if(this.ny>100){
-          //   this.ny = 100
-          // }
-          this.ny = touch.clientY - this.position.y;
-          console.log(this.ny)
+    // down(){
+    //     this.flags = true;
+    //     var touch;
+    //     if(event.touches){
+    //         touch = event.touches[0];
+    //     }else {
+    //         touch = event;
+    //     }
+    //     this.position.x = touch.clientX;
+    //     this.position.y = touch.clientY;
+    //     this.dx = player.offsetLeft;
+    //     this.dy = player.offsetTop;
+    //   },
+    //   move(){
+    //     if(this.flags){
+    //       var touch ;
+    //       if(event.touches){
+    //           touch = event.touches[0];
+    //       }else {
+    //           touch = event;
+    //       }
+    //       this.nx = touch.clientX - this.position.x;
+    //       console.log(this.nx)
+    //       // if(this.nx<0){
+    //       //   this.nx=0
+    //       // }
+    //       // if(this.ny>100){
+    //       //   this.ny = 100
+    //       // }
+    //       this.ny = touch.clientY - this.position.y;
+    //       console.log(this.ny)
 
-          this.xPum = this.dx+this.nx;
-          this.yPum = this.dy+this.ny;
-          player.style.left = this.xPum+"px";
-          player.style.top = this.yPum +"px";
-          //阻止页面的滑动默认事件；如果碰到滑动问题，1.2 请注意是否获取到 touchmove
-          document.addEventListener("touchmove",function(){
-              event.preventDefault();
-              console.log(123)
-          },false);
-        }
-      },
-    //鼠标释放时候的函数
-      end(){
-        this.flags = false;
-      },
+    //       this.xPum = this.dx+this.nx;
+    //       this.yPum = this.dy+this.ny;
+    //       player.style.left = this.xPum+"px";
+    //       player.style.top = this.yPum +"px";
+    //       //阻止页面的滑动默认事件；如果碰到滑动问题，1.2 请注意是否获取到 touchmove
+    //       document.addEventListener("touchmove",function(){
+    //           event.preventDefault();
+    //           console.log(123)
+    //       },false);
+    //     }
+    //   },
+    // //鼠标释放时候的函数
+    //   end(){
+    //     this.flags = false;
+    //   },
     ...mapMutations({
       setFullScreen: 'SET_FULL_SCREEN',
       setPlayingState: 'SET_PLAYING_STATE',
@@ -270,6 +270,8 @@ export default {
       width: 40px;
       padding: 10px 10px 0 20px;
       img {
+        width:40px;
+        height:40px;
         border-radius: 50%;
         &.play {
           animation: mymove 10s linear infinite;

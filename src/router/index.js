@@ -55,6 +55,11 @@ export default new Router({
           meta: {Auth: true},
         },
         {
+          path: '/singers',
+          name: 'singers',
+          component: resolve => require(['@/pages/singers'],resolve),
+        },
+        {
           path: '/gmap',
           name: 'gmap',
           component: resolve => require(['@/pages/gmap'],resolve),

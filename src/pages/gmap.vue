@@ -2,7 +2,7 @@
     <div class="container">
         <div id='mymap'></div>
         <van-button type="default" @click='op' :style="{'margin':'12px'}">地区查询</van-button>
-        <van-popup v-model="show" position="bottom" :overlay=show>
+        <van-popup v-model="show" position="bottom" :overlay='false'>
              <van-area :area-list="areaList" @confirm='confirm' @cancel='cancel'/>
         </van-popup>
     </div>

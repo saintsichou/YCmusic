@@ -8,7 +8,10 @@
         <van-tabbar-item icon="friends-o"  to="mymsg" :active='2'>
                   留言板
         </van-tabbar-item>
-        <van-tabbar-item icon="setting-o" to="personal" :active='3'>我的主页</van-tabbar-item>
+        <van-tabbar-item icon="friends-o"  to="singers" :active='3'>
+                  歌手
+        </van-tabbar-item>
+        <van-tabbar-item icon="setting-o" to="personal" :active='4'>我的主页</van-tabbar-item>
     </van-tabbar>
 </template>
 

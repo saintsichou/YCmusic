@@ -94,12 +94,13 @@ export default {
         api.playList(this.count++).then(res => {
           // this.playlist = res.data.playlists
           this.playlist = this.playlist.slice(this.count).concat(res.data.playlists)
+          if (this.playlist.length >= res.data.total) {
+            this.finished = true;
+          }
         })
         this.loading = false;
 
-        if (this.playlist.length >= res.data.total) {
-          this.finished = true;
-        }
+        
       }, 500);
     },
     jumpBanner(id){
@@ -152,6 +153,11 @@ export default {
       div {
         margin:6px 0;
       }
+    }
+    .van-card__thumb img{
+      
+        border-radius:5px;
+      
     }
   }
   

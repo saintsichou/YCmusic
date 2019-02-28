@@ -77,7 +77,6 @@ export default {
           api.pullMsg().then((res)=>{
               // console.log(res.data.data)
               let data = res.data.data;
-              console.log(data.sort(function(a,b){return b.id - a.id}))
               this.list = res.data.data;
             //  this.$store.dispatch('addmsgs',res.data.data)
           })

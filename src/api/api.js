@@ -23,7 +23,7 @@ export default {
     return http.fetchGet('/checkmsg')
  },
  //留言接口
- addmsg:(params) =>{
+ addmsg:(params) => {
    return http.fetchPost('/addmsg',params)
  },
  //查询音乐接口
@@ -33,6 +33,15 @@ export default {
  //查询热门音乐接口
  searchhot: () => {
   return http.fetchGet(`/search/hot`)
+},
+//查询歌手
+searchSinger: () => {
+  return http.fetchGet(`/artist/list`)
+},
+//歌手单曲
+singerDetail: (id) => {
+  return http.fetchGet(`/artists?id=${id}`)
+
 },
 //搜索建议
 searchSuggest: (keywords) => {
