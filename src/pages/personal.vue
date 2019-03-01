@@ -7,13 +7,29 @@
           <div class='title'>昵称:{{msg}}</div>
           <div class='list'>
              <van-cell-group>
-              <van-cell icon="fire" title="天气"  is-link  to='/gmap' />
-              <van-cell icon="like" title="我的信息" is-link />
-              <van-cell icon="setting" title="修改密码" is-link />
+              <van-cell icon="fire" title="看天气"  is-link  to='/gmap' />
+              <van-cell icon="like" title="看新闻" is-link  to='/news'/>
+              <van-cell icon="setting" title="修改密码" is-link  @click = 'fixpwd'/>
             </van-cell-group>
           </div>
     </div>
-    
+    <van-dialog
+      v-model="show2"
+      show-cancel-button
+      @confirm = 'confirm'
+    >
+      <van-field
+        v-model="oldpwd"
+        label="旧密码"
+        placeholder="请输入旧密码"
+      />
+      <van-field
+        v-model="newpwd"
+        type="password"
+        label="新密码"
+        placeholder="请输入新密码"
+      />
+    </van-dialog>
   </div>
   
 </template>
@@ -33,7 +49,10 @@ export default {
     return {
       headSrc:require('@/assets/h6.jpg'),
       msg: sessionStorage.getItem('user'),
-      show: false
+      show: false,
+      show2: false,
+      oldpwd: '',
+      newpwd: ''
     }
   },
   computed: {
@@ -45,6 +64,38 @@ export default {
   methods: {
     opens(){
       this.show = true
+    },
+    fixpwd(){
+      this.show2 = true
+    },
+    confirm(){
+      if(this.newpwd && this.oldpwd){
+        let ps = {
+          'id':sessionStorage.getItem('id'),
+          'newpwd':this.newpwd,
+          'oldpwd':this.oldpwd
+        }
+        api.fixpwd(ps).then((res)=>{
+          console.log(res)
+          if(res.data.code=== 1){
+             Toast(res.data.msg+'请重新登录')
+             setTimeout(()=>{
+               this.$router.push('/')
+             },3000)
+          }else{
+            if(res.data.code === 999){
+               Toast(res.data.msg+'，请重试！！！')
+               return
+            }else{
+               Toast('网络错误，请稍后再试试')
+            }
+           
+          }
+        })
+      }else{
+        Toast('不能有空项')
+      }
+      
     }
   },
   components:{

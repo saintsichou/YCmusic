@@ -1,7 +1,7 @@
 <template>
   <div class='bg'>
          <vheader></vheader>
-         <keep-alive>
+         <keep-alive exclude="musiclist">
             <router-view></router-view>
          </keep-alive>
          <tab></tab>

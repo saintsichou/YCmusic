@@ -1,6 +1,6 @@
 <template>
 
-    <van-tabbar v-model="active"  v-show="hidshow" >
+    <van-tabbar id='tb' v-model="active"  v-show='hidshow'>
         <van-tabbar-item icon="home-o" to="home" :active='0'>
                 首页              
         </van-tabbar-item>
@@ -33,7 +33,7 @@ export default {
         ()=>{
           if(!this.isResize){
             //默认屏幕高度                               
-            this.docmHeight=document.documentElement.clientHeight                                
+            this.docmHeight=document.documentElement.clientHeight //可见区域高度                               
             this.isResize = true
           }
            this.showHeight = document.body.clientHeight 
@@ -58,11 +58,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang='scss'>
-#footer{
-  width:100%;
-  overflow:hidden;
+#tb{
+
   // height:35px;
-  // position:fixed;
+  // position:absolute;
   // bottom:0;
   // font-size:12px;
 }

@@ -25,23 +25,24 @@ export default {
   },
   methods: {
     onClickLeft() {
-      console.log(window.location.href)
-      let url = window.location.href.split('?')[0];
-      let urlArr = url.split('/');
-      let furl = urlArr[urlArr.length-1]
-        if(furl == "music"){
-          console.log(this.$route.path)
+        this.$router.go(-1)
+      // console.log(window.location.href)
+      // let url = window.location.href.split('?')[0];
+      // let urlArr = url.split('/');
+      // let furl = urlArr[urlArr.length-1]
+      //   if(furl == "music"){
+      //     console.log(this.$route.path)
 
-            this.$router.go(-1)
-        }else{
-            if(this.$store.state.userInfo.vip == 1){
-            Toast(`hello,欢迎超级vip${this.$store.state.userInfo.user}`);
-            this.$router.push('/home')
-            }else{
-              Toast(`hello,${this.$store.state.userInfo.user}`);
-              this.$router.push('/home')
-            }
-        }
+      //       this.$router.go(-1)
+      //   }else{
+      //       if(this.$store.state.userInfo.vip == 1){
+      //       // Toast(`hello,欢迎超级vip${this.$store.state.userInfo.user}`);
+      //       this.$router.push('/home')
+      //       }else{
+      //         // Toast(`hello,${this.$store.state.userInfo.user}`);
+      //         this.$router.push('/home')
+      //       }
+      //   }
     },
     onClickRight() {
       sessionStorage.removeItem('user')

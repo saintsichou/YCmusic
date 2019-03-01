@@ -1,7 +1,7 @@
 <template>
   <div class='bg'>
     <van-notice-bar
-      text="热烈庆祝中华人民共和国70华诞！！！！"
+      text="热烈庆祝中华人民共和国70华诞！！！！努力！！！奋斗！！！"
       left-icon="volume-o"
       background='#276dfd'
       color='#fff'
@@ -38,7 +38,7 @@
               </router-link>
           </div>
     </div>
-    <foot v-show="hidshow"></foot>
+    <foot></foot>
   </div>
 </template>
 <script>
@@ -62,32 +62,12 @@ export default {
     }
   },
   mounted() {
-    window.onresize = () =>{
-      return(
-        ()=>{
-          if(!this.isResize){
-            //默认屏幕高度                               
-            this.docmHeight=document.documentElement.clientHeight                                
-            this.isResize = true
-          }
-           this.showHeight = document.body.clientHeight 
-        }
-      )()
-    }
+   
   },
-  watch:{
-    showHeight:'changeHeight'
-  },
+  
   methods: {
     // ...mapMutations(['LOGIN']),
-    changeHeight() {        
-        if(this.docmHeight > this.showHeight){         
-             this.hidshow=false       
-        }else{            
-          this.hidshow=true       
-         }    
-    },
-
+   
     loginUser(){
       let params = {'user_name':this.username,'password':this.password}
       if(params.user_name && params.password){
@@ -102,6 +82,7 @@ export default {
                 sessionStorage.setItem('vip', res.data.vip)
                 sessionStorage.setItem('token', res.data.token) //存储token
                 sessionStorage.setItem('user', res.data.user) //存储用户
+                sessionStorage.setItem('id', res.data.id) //存储用户
                 Toast.success('登录成功');
                 this.username='';
                 this.password='';
@@ -135,8 +116,8 @@ $background:#fff;
 .form{
   width:100%;
   overflow:hidden;
-  position:absolute;
-  top:120px;
+  float:left;
+  margin-top:50px;
   .hdsrc{
     width:64px;
     height:64px;

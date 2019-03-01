@@ -68,12 +68,15 @@ export default {
         songlist:[]
     }
   },
+  created() {
+     
+  },
   computed: {
-
+     
   },
   mounted() {
     //   console.log(this.$route.query.songID)
-      api.songDetail(this.$route.query.songID).then(res => {
+       api.songDetail(this.$route.query.songID).then(res => {
         //   console.log(res.data.playlist)
           let datas = res.data.playlist;
           this.imgs = datas.coverImgUrl;
@@ -86,6 +89,26 @@ export default {
       })
   },
   methods: {
+       formatterDateTime() {
+            var date=new Date()
+            var month=date.getMonth() + 1
+                    var datetime = date.getFullYear()
+                            + ""// "年"
+                            + (month >= 10 ? month : "0"+ month)
+                            + ""// "月"
+                            + (date.getDate() < 10 ? "0" + date.getDate() : date
+                                    .getDate())
+                            + ""
+                            + (date.getHours() < 10 ? "0" + date.getHours() : date
+                                    .getHours())
+                            + ""
+                            + (date.getMinutes() < 10 ? "0" + date.getMinutes() : date
+                                    .getMinutes())
+                            + ""
+                            + (date.getSeconds() < 10 ? "0" + date.getSeconds() : date
+                                    .getSeconds());
+                    return datetime;
+    },
      jumpSong(id,name,art){
         //   this.$router.push({ path: '/music', query: { songID: id,songName: name,artists:art}});
         //   this.$router.push({ path: '/music', query: { songID: id,songName: encodeURIComponent(name),artists:encodeURIComponent(art)}});
@@ -171,7 +194,7 @@ export default {
         .result{
             width:100%;
             overflow:hidden;
-            padding-bottom:1px;
+            padding-bottom:50px;
             ul{
                 width:100%;
                 overflow:hidden;

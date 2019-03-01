@@ -55,4 +55,12 @@ searchSuggest: (keywords) => {
  songPlay: (id) => {
    return http.fetchGet(`/song/url?id=${id}`)
  },
+ //修改密码
+ fixpwd: (ps) =>{
+  return http.fetchPost('/fix',ps)
+ },
+ //拉去新闻
+  getNews: (ps) => {
+    return http.fetchPost('/news',ps)
+  }
 }

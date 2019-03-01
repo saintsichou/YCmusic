@@ -24,7 +24,7 @@
       </van-cell-group>
     <h2 class='van-nav-bar__title'>这是留言板</h2>
     <div class='box'>
-        <div class='msgBox' v-for='(item,index) in list' :key='item.id'>
+        <div class='msgBox' v-for='(item,index) in list' :key='item.id' @click='del()'>
           <div class='msgheader'>
               <span :class='vip0'>{{item.user_name}}</span>
               <van-rate
@@ -131,6 +131,9 @@ export default {
         let dateee = new Date(t).toJSON();  
         let date = new Date(+new Date(dateee)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'') 
         return date;
+    },
+    del(){
+      console.log('000')
     }
     
   },

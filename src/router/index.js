@@ -60,6 +60,11 @@ export default new Router({
           component: resolve => require(['@/pages/singers'],resolve),
         },
         {
+          path: '/news',
+          name: 'news',
+          component: resolve => require(['@/pages/news'],resolve),
+        },
+        {
           path: '/gmap',
           name: 'gmap',
           component: resolve => require(['@/pages/gmap'],resolve),

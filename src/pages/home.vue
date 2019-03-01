@@ -89,7 +89,6 @@ export default {
   methods: {
      onLoad() {
       // 异步更新数据
-
       setTimeout(() => {
         api.playList(this.count++).then(res => {
           // this.playlist = res.data.playlists
@@ -98,16 +97,14 @@ export default {
             this.finished = true;
           }
         })
-        this.loading = false;
-
-        
+        this.loading = false;  
       }, 500);
     },
     jumpBanner(id){
       // this.$router.push({ path: '/musiclist', query: { songID: id }});
     },
     jumpPlaylist(id){
-      console.log(id)
+
       this.$router.push({ path: '/musiclist', query: { songID: id }});
     },
     onRefresh() {
