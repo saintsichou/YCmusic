@@ -48,7 +48,11 @@ export default {
        songs:'',
        flags: false,
        position: { x: 0, y: 0 },
-       nx: '', ny: '', dx: '', dy: '', xPum: '', yPum: ''
+       nx: '', ny: '', dx: '', dy: '', xPum: '', yPum: '',
+      hidshow:true,
+      docmHeight: document.documentElement.clientHeight,  //默认屏幕高度
+      showHeight:  document.documentElement.clientHeight,  //实时屏幕高度
+      isResize:false //默认屏幕高度是否已获取
     }
   },
 
@@ -56,8 +60,20 @@ export default {
 
   },
   mounted() {
-      
+    window.onresize = () =>{
+      return(
+        ()=>{
+          if(!this.isResize){
+            //默认屏幕高度                               
+            this.docmHeight=document.documentElement.clientHeight //可见区域高度                               
+            this.isResize = true
+          }
+           this.showHeight = document.body.clientHeight 
+        }
+      )()
+    }
   },
+  
   computed: {
     ...mapGetters([
       'fullScreen',
@@ -73,10 +89,12 @@ export default {
     
   },
   watch: {
+    showHeight:'changeHeight',
     //以下两种方法均可行
     //  '$store.state.songUrl.id':function(newVal,oldVal){
     //    this.getSong(newVal)
     //  },
+    //监听歌曲是否被改变
    songUrl(n,o){
     //  console.log(n.id)
     if(n.id){
@@ -88,6 +106,15 @@ export default {
    
   },
   methods: {
+    //获取屏幕高度
+    changeHeight() {        
+        if(this.docmHeight > this.showHeight){         
+             this.hidshow=false       
+        }else{            
+          this.hidshow=true       
+         }    
+    },
+    //获取歌曲api
     getSong (id) {
         api.songPlay(id).then(res =>{
             if(res.data.data[0].url !== null && res.data.data[0].url !==  ''){
@@ -286,10 +313,10 @@ export default {
       flex-direction: column;
       justify-content: center;
       flex: 1;
-      overflow: hidden;
+      // overflow: hidden;
       .name {
        margin-bottom: 2px;
-       line-height: 14px;
+       line-height: 15px;
        font-size: 14px;
        color: #000;
       }

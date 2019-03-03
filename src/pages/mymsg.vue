@@ -1,4 +1,5 @@
 <template>
+<transition name="van-fade">
   <div class='container'>
     <van-cell-group>
         <van-field
@@ -42,6 +43,7 @@
         </div>
     </div>
   </div>
+</transition>
 </template>
 
 <script>
@@ -76,8 +78,10 @@ export default {
         if(res.data.code ===1){
           api.pullMsg().then((res)=>{
               // console.log(res.data.data)
-              let data = res.data.data;
-              this.list = res.data.data;
+              let datas = res.data.data;
+              this.list = datas.sort(this.compare('id'))
+              // res.data.data;
+            
             //  this.$store.dispatch('addmsgs',res.data.data)
           })
         }else{
@@ -88,8 +92,11 @@ export default {
       })
   },
   methods: {
-    sortN(a,b){
-      return b.id - a.id
+
+    compare(property) {
+        return function (a, b) {
+            return (b[property] - a[property])
+        }
     },
     send(){
       // console.log(time())

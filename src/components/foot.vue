@@ -64,7 +64,7 @@ export default {
   width:100%;
   height:35px;
   float:left;
-  margin-top:120px;
+  margin-top:100px;
   font-size:12px
 }
 </style>

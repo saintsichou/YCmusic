@@ -1,4 +1,5 @@
 <template>
+<transition name="van-fade">
   <div>
     <van-swipe :autoplay="3000" indicator-color="white">
       <van-swipe-item v-for='(item,index) in items' :key='item.id' >
@@ -37,6 +38,7 @@
     </div>
     </van-pull-refresh>
   </div>
+</transition>
 </template>
 
 <script>
@@ -74,17 +76,20 @@ export default {
       }
     }).catch(err => {
       console.log(`错误 - ${err}`)
-    })
-    api.banner().then(res => {
+    }),
+    setTimeout(()=>{
+         api.banner().then(res => {
       // 解析成功
-      this.items= res.data.banners;
-      // console.log(this.items)
-    }).catch(err => {
-      console.log(`错误 - ${err}`)
+          this.items= res.data.banners;
+          // console.log(this.items)
+        }).catch(err => {
+          console.log(`错误 - ${err}`)
+        })
+    },300)
+   
+    api.playList(5).then(res => {
+      this.playlist = res.data.playlists
     })
-    // api.playList(5).then(res => {
-    //   this.playlist = res.data.playlists
-    // })
   },
   methods: {
      onLoad() {

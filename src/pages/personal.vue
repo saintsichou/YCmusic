@@ -1,4 +1,5 @@
 <template>
+<transition name="van-fade">
   <div class='container'>
     <div class='form'>
           <div>
@@ -31,7 +32,7 @@
       />
     </van-dialog>
   </div>
-  
+</transition> 
 </template>
 
 <script>

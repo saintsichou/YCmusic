@@ -29,7 +29,7 @@
                   placeholder="请输入密码"
                   required
                   clearable
-                   type="password"
+                  type="password"
                 />
               </van-cell-group>
               <van-button type="default" size="large" class='btn' @click='loginUser'>登录</van-button>

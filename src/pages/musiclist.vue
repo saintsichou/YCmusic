@@ -1,4 +1,5 @@
 <template>
+<transition name="van-fade">
   <div class='container'> 
     <div class='musicBox'>
        <div class= 'boxHeader'>
@@ -44,6 +45,7 @@
        </div> 
     </div>
   </div>
+</transition>
 </template>
 
 <script>

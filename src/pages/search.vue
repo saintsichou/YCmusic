@@ -1,4 +1,5 @@
 <template>
+<transition name="van-fade">
   <div class='container'>
     <div class='mainContent'>
         <van-search
@@ -41,6 +42,7 @@
         </div>
     </div>
   </div>
+</transition>
 </template>
 
 <script>

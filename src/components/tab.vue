@@ -1,6 +1,6 @@
 <template>
 
-    <van-tabbar id='tb' v-model="active"  v-show='hidshow'>
+    <van-tabbar id='tb' v-model="active"   :fixed='false' :class="hidshow?'fix':'abs'">
         <van-tabbar-item icon="home-o" to="home" :active='0'>
                 首页              
         </van-tabbar-item>
@@ -64,5 +64,17 @@ export default {
   // position:absolute;
   // bottom:0;
   // font-size:12px;
+}
+.fix{
+  height:50px;
+  position:fixed;
+  bottom:0;
+  font-size:12px;
+}
+.abs{
+  height:50px;
+  // position:fixed;
+  // bottom:0;
+  font-size:12px;
 }
 </style>

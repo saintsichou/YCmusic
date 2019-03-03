@@ -1,5 +1,16 @@
 <template>
     <div class="container">
+        <div class="infos" ref='infos' v-for='(item,index) in lists' :key='index'>
+            <h4>今日天气</h4><hr>
+            <p>城市/区:{{item.city}}<p/>
+            <p>天气:{{item.weather}}<p/>
+            <p>温度:{{item.temperature}}<p/>
+            <p>风向:{{item.windDirection}}<p/>
+            <p>风力:{{item.windPower}}<p/>
+            <p>湿度:{{item.humidity}}<p/>
+            <p>发布时间:{{item.reportTime}}<p/>
+           
+        </div>
         <div id='mymap'></div>
         <van-button type="default" @click='op' :style="{'margin':'12px'}">地区查询</van-button>
         <van-popup v-model="show" position="bottom" :overlay='false'>
@@ -27,6 +38,7 @@ export default {
   data(){
       return {
         show:false,
+        lists:[],
         areaList:
             {
                 province_list: {
@@ -64,7 +76,9 @@ export default {
   },
   mounted() {
     this.init();
-    this.getWeather('白云区');
+    this.getWeather();
+                    console.log(this.$refs.infos)
+
   },
   methods: {
     op(e){
@@ -79,32 +93,17 @@ export default {
         })
     },
     getWeather(cityname){   
+        const self = this; 
          AMap.plugin('AMap.Weather', function() {
             var weather = new AMap.Weather();
         //查询实时天气信息, 查询的城市到行政级别的城市，如朝阳区、杭州市
          weather.getLive(cityname, function(err, data) {
                 if (!err) {
-                    var str = [];
-                    str.push('<h4 style="padding:5px">实时天气' + '</h4><hr>');
-                    str.push('<p style="padding:5px">城市/区：' + data.city + '</p>');
-                    str.push('<p style="padding:5px">天气：' + data.weather + '</p>');
-                    str.push('<p style="padding:5px">温度：' + data.temperature + '℃</p>');
-                    str.push('<p style="padding:5px">风向：' + data.windDirection + '</p>');
-                    str.push('<p style="padding:5px">风力：' + data.windPower + ' 级</p>');
-                    str.push('<p style="padding:5px">空气湿度：' + data.humidity + '</p>');
-                    str.push('<p style="padding:5px">发布时间：' + data.reportTime + '</p>');
-                    
-                    var marker = new AMap.Marker({map: map, position: map.getCenter()});
-                   
-                    var infoWin = new AMap.InfoWindow({
-                        content: '<div class="info" style="position:inherit;margin-bottom:0;background:rgba(0,0,0,.6);color:#ccc">'+str.join(''),
-                        isCustom:true,
-                    });
-                    infoWin.open(map, marker.getPosition());
-                   
+                    self.lists.push(data) 
                 }
          });
         })
+
     },
     drawBounds(name) {
             //加载行政区划插件
@@ -171,6 +170,23 @@ export default {
         background: #f8f8f8;
         .info{
             background:#ccc
+        }
+    }
+    .infos{
+        position:fixed;
+        top:50px;
+        width:120px;
+        right:2px;
+        z-index:300;
+        background:rgba(0,0,0,.6);
+        color:#fff;
+
+        h4{
+            padding:1px
+        }
+        p{
+            padding:1px;
+
         }
     }
     
