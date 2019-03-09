@@ -49,6 +49,11 @@ export default {
       sessionStorage.removeItem('token')
       sessionStorage.removeItem('vip')
       localStorage.removeItem('searchOne')
+      this.$store.dispatch('songurl',{
+              'id':'',
+              'title':'',
+              'singer':''
+          })
       this.$router.push('/')
     }
   }
